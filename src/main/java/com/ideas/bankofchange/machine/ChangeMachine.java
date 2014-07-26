@@ -12,14 +12,12 @@ public class ChangeMachine {
     public Map<Integer, Integer> getMeChangeFor(int inputAmount) throws Exception {
         int amountSum = 0;
         Map<Integer, Integer> changeAmount = new HashMap<Integer, Integer>();
-        for (Integer note : denominationService.getAvailableNotesFor(inputAmount)) {
-            if (!areEqual(inputAmount, note)) {
-                amountSum = getUpdatedAmountSumFor(inputAmount, amountSum, changeAmount, note, denominationService.getDenominationCountFor(note));
+        for (Integer currencyNote : denominationService.getAvailableNotesFor(inputAmount)) {
+            if (!areEqual(inputAmount, currencyNote)) {
+                amountSum = getUpdatedAmountSumFor(inputAmount, amountSum, changeAmount, currencyNote, denominationService.getDenominationCountFor(currencyNote));
             }
-
         }
-
-        return returnChangeIfPossible(inputAmount, changeAmount, amountSum);
+        return returnChangeAmount(inputAmount, changeAmount, amountSum);
     }
 
     private int getUpdatedAmountSumFor(int inputAmount, int sum, Map<Integer, Integer> changeAmount, Integer note, int noteCount) throws Exception {
@@ -45,11 +43,10 @@ public class ChangeMachine {
         return sum + note;
     }
 
-    private Map<Integer, Integer> returnChangeIfPossible(int inputAmount, Map<Integer, Integer> changeAmount, Integer sum) {
+    private Map<Integer, Integer> returnChangeAmount(int inputAmount, Map<Integer, Integer> changeAmount, Integer sum) {
         if (sum != inputAmount) {
-            changeAmount = new HashMap<Integer, Integer>();
+            changeAmount.clear();
             changeAmount.put(inputAmount, 1);
-            return changeAmount;
         }
         return changeAmount;
     }
