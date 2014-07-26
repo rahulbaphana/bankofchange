@@ -23,7 +23,7 @@ public class ChangeMachine {
     private int getUpdatedAmountSumFor(int inputAmount, int sum, Map<Integer, Integer> changeAmount, Integer note, int noteCount) throws Exception {
         for (int i = 1; i <= noteCount; i++) {
             if (additionOf(sum, note) <= inputAmount) {
-                sum = getSumWithAdditionTo(sum, note, changeAmount);
+                sum = getSumWith(sum, note, changeAmount);
             }
         }
         return sum;
@@ -33,7 +33,7 @@ public class ChangeMachine {
         return note == inputAmount;
     }
 
-    private int getSumWithAdditionTo(int sum, Integer note, Map<Integer, Integer> changeAmount) throws Exception {
+    private int getSumWith(int sum, Integer note, Map<Integer, Integer> changeAmount) throws Exception {
         denominationService.deductDenominationFrom(note, 1);
         denominationService.addDenominationToMap(changeAmount, note, 1);
         return additionOf(sum, note);
