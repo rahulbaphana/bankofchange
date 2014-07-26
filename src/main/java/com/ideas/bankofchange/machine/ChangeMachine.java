@@ -3,7 +3,7 @@ package com.ideas.bankofchange.machine;
 import java.util.*;
 
 public class ChangeMachine {
-    private DenominationService denominationService = new DenominationService();
+    private DenominationService denominationService;
 
     public ChangeMachine(final DenominationService denominationService) {
         this.denominationService = denominationService;
