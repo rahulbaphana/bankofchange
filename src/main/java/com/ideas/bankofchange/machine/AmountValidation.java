@@ -3,7 +3,7 @@ package com.ideas.bankofchange.machine;
 import java.util.List;
 import java.util.Map;
 
-public class AmountValidaton {
+public class AmountValidation {
 
     public static final int MAXIMUM_ALLOWED_AMOUNT = 1000;
 
@@ -23,7 +23,7 @@ public class AmountValidaton {
         }
     }
 
-    public void validateForLeastDinomination(int inputAmount, List<Integer> availableNotes) throws Exception {
+    public void validateForLeastDenomination(int inputAmount, List<Integer> availableNotes) throws Exception {
         if(availableNotes.get((availableNotes.size()-1)) > inputAmount) {
             showErrorMessage("we don't have denomination of lower value");
         }

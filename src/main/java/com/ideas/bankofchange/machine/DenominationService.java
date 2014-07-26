@@ -3,7 +3,7 @@ package com.ideas.bankofchange.machine;
 import java.util.*;
 
 public class DenominationService {
-    private AmountValidaton amountValidaton = new AmountValidaton();
+    private AmountValidation amountValidation = new AmountValidation();
     private Map<Integer, Integer> mapOfNoteCount = new HashMap<Integer, Integer>();
     private Set<Integer> notesOutOfStock = new TreeSet<Integer>();
 
@@ -17,7 +17,7 @@ public class DenominationService {
     }
 
     public void addDenominationToMap(Map<Integer, Integer> noteCount, int note, int count) throws Exception {
-        amountValidaton.checkIfMaxLimitReached(note, noteCount.containsKey(note) ? (noteCount.get(note) + count) : count);
+        amountValidation.checkIfMaxLimitReached(note, noteCount.containsKey(note) ? (noteCount.get(note) + count) : count);
         noteCount.put(note, noteCount.containsKey(note) ? (noteCount.get(note) + count) : count);
     }
 
@@ -51,9 +51,9 @@ public class DenominationService {
     }
 
     public List<Integer> getAvailableNotesFor(int inputAmount) throws Exception {
-        amountValidaton.validateIfThereAreAnyDenominationsEnteredIn(mapOfNoteCount);
+        amountValidation.validateIfThereAreAnyDenominationsEnteredIn(mapOfNoteCount);
         List<Integer> availableNotes = getOrderedListOFAvailableNotes();
-        amountValidaton.validateForLeastDinomination(inputAmount, availableNotes);
+        amountValidation.validateForLeastDenomination(inputAmount, availableNotes);
         return availableNotes;
     }
 
