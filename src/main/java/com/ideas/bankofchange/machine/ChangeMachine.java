@@ -3,18 +3,18 @@ package com.ideas.bankofchange.machine;
 import java.util.*;
 
 public class ChangeMachine {
-    private DenominationService denominationService;
+    private DenominationHandler denominationHandler;
 
-    public ChangeMachine(final DenominationService denominationService) {
-        this.denominationService = denominationService;
+    public ChangeMachine(final DenominationHandler denominationHandler) {
+        this.denominationHandler = denominationHandler;
     }
 
     public Map<Integer, Integer> getMeChangeFor(int inputAmount) throws Exception {
         int amountSum = 0;
         Map<Integer, Integer> changeAmount = new HashMap<Integer, Integer>();
-        for (Integer currencyNote : denominationService.getAvailableNotesFor(inputAmount)) {
+        for (Integer currencyNote : denominationHandler.getAvailableNotesFor(inputAmount)) {
             if (!areEqual(inputAmount, currencyNote)) {
-                amountSum = getUpdatedAmountSumFor(inputAmount, amountSum, changeAmount, currencyNote, denominationService.getDenominationCountFor(currencyNote));
+                amountSum = getUpdatedAmountSumFor(inputAmount, amountSum, changeAmount, currencyNote, denominationHandler.getDenominationCountFor(currencyNote));
             }
         }
         return returnChangeAmount(inputAmount, changeAmount, amountSum);
@@ -34,8 +34,8 @@ public class ChangeMachine {
     }
 
     private int getSumWith(int sum, Integer note, Map<Integer, Integer> changeAmount) throws Exception {
-        denominationService.deductDenominationFrom(note, 1);
-        denominationService.addDenominationToMap(changeAmount, note, 1);
+        denominationHandler.deductDenominationFrom(note, 1);
+        denominationHandler.addDenominationToMap(changeAmount, note, 1);
         return additionOf(sum, note);
     }
 

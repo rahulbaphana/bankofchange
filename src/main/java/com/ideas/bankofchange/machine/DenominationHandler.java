@@ -2,12 +2,12 @@ package com.ideas.bankofchange.machine;
 
 import java.util.*;
 
-public class DenominationService {
+public class DenominationHandler {
     private AmountValidation amountValidation = new AmountValidation();
     private Map<Integer, Integer> mapOfNoteCount = new HashMap<Integer, Integer>();
     private Set<Integer> notesOutOfStock = new TreeSet<Integer>();
 
-    public DenominationService withADenominationAdded(int note, int count) throws Exception {
+    public DenominationHandler withADenominationAdded(int note, int count) throws Exception {
         addDenominationToMap(mapOfNoteCount, note, count);
         return this;
     }

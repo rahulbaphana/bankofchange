@@ -11,7 +11,7 @@ public class ChangeMachineTest {
 
     @Test
     public void shouldCreateAnInstanceOfChangeMachine(){
-        ChangeMachine changeMachine = new ChangeMachine(new DenominationService());
+        ChangeMachine changeMachine = new ChangeMachine(new DenominationHandler());
 
         assertNotNull(changeMachine);
     }
@@ -35,8 +35,8 @@ public class ChangeMachineTest {
         Assert.assertEquals(1, changeAmount.get(200).intValue());
     }
 
-    private DenominationService getDenominationServiceWithAddedDenominations() throws Exception {
-        return new DenominationService().withADenominationAdded(100, 5).withADenominationAdded(50, 5).withADenominationAdded(20, 5).withADenominationAdded(10, 5);
+    private DenominationHandler getDenominationServiceWithAddedDenominations() throws Exception {
+        return new DenominationHandler().withADenominationAdded(100, 5).withADenominationAdded(50, 5).withADenominationAdded(20, 5).withADenominationAdded(10, 5);
     }
 
 }
