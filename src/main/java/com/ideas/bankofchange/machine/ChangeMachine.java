@@ -17,7 +17,7 @@ public class ChangeMachine {
                 amountSum = getUpdatedAmountSumFor(inputAmount, amountSum, changeAmount, currencyNote, denominationHandler.getDenominationCountFor(currencyNote));
             }
         }
-        return returnChangeAmount(inputAmount, changeAmount, amountSum);
+        return getChangeAmountFor(inputAmount, changeAmount, amountSum);
     }
 
     private int getUpdatedAmountSumFor(int inputAmount, int sum, Map<Integer, Integer> changeAmount, Integer note, int noteCount) throws Exception {
@@ -43,7 +43,7 @@ public class ChangeMachine {
         return sum + note;
     }
 
-    private Map<Integer, Integer> returnChangeAmount(int inputAmount, Map<Integer, Integer> changeAmount, Integer sum) {
+    private Map<Integer, Integer> getChangeAmountFor(int inputAmount, Map<Integer, Integer> changeAmount, Integer sum) {
         if (sum != inputAmount) {
             changeAmount.clear();
             changeAmount.put(inputAmount, 1);
